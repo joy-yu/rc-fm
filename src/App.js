@@ -16,7 +16,8 @@ class App extends Component {
     };
   }
 
-  toogleList(){
+  //切换播放列表显示
+  toggleList(){
     let list = document.getElementById('list');
     let listIcon = document.querySelector('.list-icon');
     if(!list.className){
@@ -28,29 +29,72 @@ class App extends Component {
     }
   }
 
+  //开始播放
   start(od) {
     clearInterval(this.timer);
-    this.player.pause();
     let list = document.getElementById('list');
+    let listAll = [].slice.call(list.querySelectorAll('li'));
     let progressNow = document.getElementById('progressNow');
     let bgPic = document.querySelector('.bgPic');
     setTimeout(()=>{
       bgPic.src=ml.tracks[this.state.runOrder].picUrl;
     },1000);
     progressNow.style.width = 0;
-    list.querySelectorAll('li').forEach((v,i)=>v.classList.remove('list-on'));
-    list.querySelectorAll('li')[od].classList.add('list-on');
+    listAll.forEach((v,i)=>v.classList.remove('list-on'));
+    listAll[od].classList.add('list-on');
     this.player.src = ml.tracks[od].mp3Url;
     this.player.play();
   };
 
+  //播放列表点击
   listClick(od){
     this.setState({
       preOrder: this.state.runOrder,
       runOrder: od
     });
-    this.toogleList();
+    this.toggleList();
     this.start(od);
+  }
+
+  //播放类型切换
+  handleRunType() {
+    let runType = document.getElementById('runType');
+
+    if (this.state.runType === 0) {
+      this.setState({
+        runType: this.state.runType + 1
+      });
+      runType.querySelector('i').className = 'rand';
+    } else if (this.state.runType === 1) {
+      this.setState({
+        runType: this.state.runType + 1
+      });
+      runType.querySelector('i').className = 'loop-one';
+    } else if (this.state.runType === 2) {
+      this.setState({
+        runType: 0
+      });
+      runType.querySelector('i').className = 'loop';
+    }
+  };
+
+  //切换显示音量条
+  handleShowVol() {
+    let vControl = document.querySelector('.vc-box');
+    if (vControl.style.display === '') {
+      vControl.style.display = 'block';
+    } else {
+      vControl.style.display = '';
+    }
+  }
+
+  //暂停播放切换
+  handleToggleRun() {
+    if (this.player.paused) {
+      this.player.play();
+    } else {
+      this.player.pause();
+    }
   }
 
   componentDidMount() {
@@ -58,15 +102,14 @@ class App extends Component {
     let previous = document.getElementById('previous');
     let next = document.getElementById('next');
     let pic = document.querySelector('.music-pic');
-    let runType = document.getElementById('runType');
     let progressNow = document.getElementById('progressNow');
-
+    let list = document.getElementById('list');
 
     setTimeout(()=>{
       this.start(this.state.runOrder);
     },2000);
 
-
+    //监听播放结束
     this.player.addEventListener('ended',()=>{
       if(this.state.runType === 2)
         this.start(this.state.runOrder);
@@ -74,20 +117,19 @@ class App extends Component {
         next.click();
       }
     });
-
+    //监听播放
     this.player.addEventListener('playing', () => {
       clearInterval(this.timer);
       pic.style['animation-play-state'] = '';
       play.firstElementChild.className = 'pause';
 
       let totalTime = this.player.duration;
-
       this.timer = setInterval(() => {
         progressNow.style.width = `${this.player.currentTime/totalTime*100}%`;
       }, 1000);
 
     });
-
+    //监听暂停
     this.player.addEventListener('pause',()=>{
         clearInterval(this.timer);
         pic.style['animation-play-state'] = 'paused';
@@ -98,14 +140,7 @@ class App extends Component {
     });
 
 
-    //暂停播放切换
-    play.addEventListener('click', ()=> {
-      if(this.player.paused){
-        this.player.play();
-      } else{
-        this.player.pause();
-      }
-    });
+
 
     //上一首
     previous.addEventListener('click', () => {
@@ -164,28 +199,60 @@ class App extends Component {
       }
     });
 
-    //播放类型切换
-    runType.addEventListener('click', () => {
-      if(this.state.runType === 0){
-        this.setState({
-          runType: this.state.runType + 1
-        });
-        runType.querySelector('i').className = 'rand';
-      } else if(this.state.runType === 1){
-        this.setState({
-          runType: this.state.runType + 1
-        });
-        runType.querySelector('i').className = 'loop-one';
-      } else if(this.state.runType === 2){
-        this.setState({
-          runType: 0
-        });
-        runType.querySelector('i').className = 'loop';
+
+
+    //音量调节
+    let vControl = document.querySelector('.vc-box');
+    let currVol = document.querySelector('.curr-vol');
+    let dragging = null;
+
+    let handleControl = (e) => {
+      switch (e.type) {
+
+        case 'mousedown':
+          dragging = e.target;
+          let rect = vControl.getBoundingClientRect();
+          let volValue = (100 - e.clientY + rect.top) > 100 ? 100 : (100 - e.clientY + rect.top);
+          currVol.style.height = volValue + 'px';
+          this.player.volume = volValue * 0.01;
+          break;
+
+        case 'mousemove':
+          if (dragging !== null) {
+            let rect = vControl.getBoundingClientRect();
+            let volValue = (100 - e.clientY + rect.top) > 100 ? 100 : (100 - e.clientY + rect.top);
+            currVol.style.height = volValue + 'px';
+            this.player.volume = volValue * 0.01;
+          }
+          break;
+
+        case 'mouseup':
+          dragging = null;
+          break;
+        default:
+          dragging = null;
+          break;
+      }
+    }
+    vControl.addEventListener('mousedown', handleControl);
+    vControl.addEventListener('mousemove', handleControl);
+    vControl.addEventListener('mouseup', handleControl);
+
+
+    //播放列表滑动事件
+    let firstPos;
+    list.addEventListener('touchstart', (e)=> {
+      firstPos = e.touches[0].clientX;
+    });
+    list.addEventListener('touchend', (e)=> {
+      let endPos = e.changedTouches[0].clientX;
+      if(Math.abs(firstPos-endPos)>50){
+        this.toggleList();
       }
     });
 
-
   }
+
 
   render() {
     return (
@@ -211,7 +278,7 @@ class App extends Component {
           <a id="previous">
           </a>
 
-          <a id="play">
+          <a id="play" onClick={this.handleToggleRun.bind(this)}>
             <i className="pause"></i>
           </a>
 
@@ -239,17 +306,24 @@ class App extends Component {
           </ul>
 
         </div>
-          <a id="tright" onClick={this.toogleList}>
+          <a id="tright" onClick={this.toggleList}>
             <svg className="list-icon">
-              <rect x="6" y="9" rx="2" ry="2" width="28" height="5"></rect>
-              <rect x="6" y="18" rx="2" ry="2" width="28" height="5"></rect>
-              <rect x="6" y="27" rx="2" ry="2" width="28" height="5"></rect>
+              <rect x="6" y="9" rx="2" ry="2" width="26" height="4"></rect>
+              <rect x="6" y="18" rx="2" ry="2" width="26" height="4"></rect>
+              <rect x="6" y="27" rx="2" ry="2" width="26" height="4"></rect>
             </svg>
           </a>
 
 
-       <a id="runType">
+       <a id="runType" onClick={this.handleRunType.bind(this)} >
           <i className="loop"></i>
+        </a>
+
+        <a id="volume">
+          <div className="vc-box">
+            <div className="curr-vol"></div>
+          </div>
+          <i className="unmute" onClick={this.handleShowVol}></i>
         </a>
 
       </div>
