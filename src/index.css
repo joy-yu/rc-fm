@@ -1,0 +1,19 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Microsoft YaHei',sans-serif;
+}
+
+a{
+  cursor: pointer;
+}
+ul{
+  list-style: none;
+}
+.clearfix:after{
+  overflow: hidden;
+  content: '';
+  display: block;
+  clear: both;
+}
