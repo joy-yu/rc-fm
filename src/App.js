@@ -20,8 +20,6 @@ export default class App extends Component {
   }
 
 
-
-
   //开始播放
   start(od) {
     this.setState({isPlaying: true});
@@ -32,10 +30,10 @@ export default class App extends Component {
     let bgPic = document.querySelector('.bgPic');
     setTimeout(()=>{
       bgPic.src=ml.tracks[this.state.runOrder].picUrl;
-    },1000);
+    },500);
     progressNow.style.width = 0;
-    listAll.forEach((v,i)=>v.classList.remove('list-on'));
-    listAll[od].classList.add('list-on');
+    listAll[this.state.preOrder].classList.remove('list-on');
+    listAll[this.state.runOrder].classList.add('list-on');
     this.player.src = ml.tracks[od].mp3Url;
     this.player.play();
   };
@@ -55,7 +53,7 @@ export default class App extends Component {
   }
 
   //播放列表点击
-  listClick(od) {
+  listClick(od, e) {
     this.setState({
       preOrder: this.state.runOrder,
       runOrder: od
@@ -306,7 +304,7 @@ export default class App extends Component {
             {
               ml.tracks.map((v, i) => {
                 return(
-                  <li className="clearfix list-item" key={`ml${i}`} onClick={this.listClick.bind(this,i)}>
+                  <li className="clearfix list-item" key={`ml${i}`} onClick={this.listClick.bind(this,i)} >
                     <div className="col col-1">
                       <span title={v.name}>{`${i}.${v.name}`}</span>
                     </div>

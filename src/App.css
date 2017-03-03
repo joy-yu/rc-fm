@@ -58,9 +58,9 @@ html,body{
  * 中下控制组件
  */
 #control {
-  position: absolute;
+  position: fixed;
   left: 50%;
-  bottom: 10%;
+  bottom: 15%;
   transform: translateX(-50%);
   width: 250px;
   text-align: center;
@@ -91,7 +91,7 @@ html,body{
  * 中底部播放类型
  */
 #runType{
-  position: absolute;
+  position: fixed;
   left: 50%;
   bottom: 10px;
   transition: .4s;
@@ -112,7 +112,7 @@ html,body{
  * 左边侧边栏组件
  */
 #list{
-  position: absolute;
+  position: fixed;
   top:0;
   height: 100%;
   overflow:auto;
@@ -173,7 +173,7 @@ html,body{
  * 左下列表按钮
  */
 #listBtn{
-  position: absolute;
+  position: fixed;
   left: 15px;bottom: 10px;
   transition: 0.4s transform;
 }
@@ -190,7 +190,7 @@ html,body{
  * 右下音量组件
  */
 #volume{
-  position: absolute;
+  position: fixed;
   right: 15px;bottom: 10px;
   cursor: inherit;
 }
@@ -244,12 +244,25 @@ html,body{
 
 @media screen and (max-width:500px){
   .music-info{
-    font-size: .8em;
+    font-size: .6em;
   }
   .music-info .music-pic{
     width: 150px;height: 150px;
   }
-
+  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+    transform:scale(0.8);
+  }
+  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one, .i-unmute:hover,.list-icon:hover{
+    transform: scale(1);
+  }
+}
+@media screen and (max-height:600px){
+  .music-info{
+    font-size: .6em;
+  }
+  .music-info .music-pic{
+    width: 150px;height: 150px;
+  }
   .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
     transform:scale(0.8);
   }
