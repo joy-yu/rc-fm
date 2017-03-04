@@ -42,11 +42,11 @@ export default class App extends Component {
     let list = document.getElementById('list');
     let listBtn = document.getElementById('listBtn');
     if(list.className.indexOf('to-right') === -1){
-      list.classList.add('to-right');
-      listBtn.classList.add('to-right');
+      list.className +=' to-right';
+      listBtn.className +=' to-right';
     } else{
-      list.classList.remove('to-right');
-      listBtn.classList.remove('to-right');
+      list.className = (list.className.replace('to-right', '')).trim();
+      listBtn.className = (listBtn.className.replace('to-right', '')).trim();
     }
   }
 
