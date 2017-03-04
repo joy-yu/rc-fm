@@ -1,0 +1,42 @@
+/**
+ * 中部播放音乐信息
+ */
+.music-info{
+  padding: 5em 1em 0;
+  font-size: 1em;
+  text-align: center;
+}
+.music-info .music-pic {
+  width: 200px;height: 200px;
+  border-radius: 50%;
+  animation: pic-spin infinite 15s linear;
+}
+.music-info .music-name{
+  font-size: 2.5em;
+  margin: 2em 0 1em;
+}
+.music-info .author-name{
+  font-size: 1.5em;
+}
+
+@media screen and (max-width:500px){
+  .music-info{
+    font-size: .6em;
+  }
+  .music-info .music-pic{
+    width: 150px;height: 150px;
+  }
+}
+@media screen and (max-height:600px){
+  .music-info{
+    font-size: .6em;
+  }
+  .music-info .music-pic{
+    width: 150px;height: 150px;
+  }
+}
+
+@keyframes pic-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

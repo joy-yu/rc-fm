@@ -1,0 +1,59 @@
+/**
+ * 左边侧边栏组件
+ */
+#list{
+  position: fixed;
+  top:0;
+  height: 100%;
+  overflow:auto;
+  width: 360px;
+  left: -360px;
+  z-index: 1;
+  text-align: left;
+  color: #ccc;
+  background: #1e1e1e;
+  transition: 0.4s transform;
+  padding: 1em 0;
+}
+#list::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+#list::-webkit-scrollbar-button {
+  display: none;
+}
+#list::-webkit-scrollbar-track {
+  background: #666;
+  border-radius: 4px;
+}
+#list::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
+}
+
+
+.list-item{
+  cursor: pointer;
+  border-bottom: 1px solid #2e2e2e;
+  line-height: 2em;
+}
+.list-item:hover{
+  background: #333;
+}
+.list-on{
+  background: #333;
+}
+.list-item .col{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 0 1em;
+}
+.list-item .col-1{
+  float: left;
+  width: 66%;
+}
+.list-item .col-2{
+  float: right;
+  width: 33%;
+}

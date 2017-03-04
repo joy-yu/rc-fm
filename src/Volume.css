@@ -1,0 +1,31 @@
+/**
+ * 右下音量组件
+ */
+#volume{
+  position: fixed;
+  right: 15px;bottom: 10px;
+  cursor: inherit;
+}
+
+.vc-box{
+  width: 40px;
+  position: relative;
+  left: -2px;
+  margin: 0 auto;
+  background: #171719;
+  height: 100px;
+  border-radius:5px 5px 0 0; 
+  cursor: pointer;
+}
+.curr-vol{
+  background: red;
+  position: absolute;
+  bottom: 0;
+  border-radius: inherit;
+  width: inherit;
+  height: 100px;
+}
+
+.i-unmute{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAEX0lEQVRoQ+3YZ8i2YxgH8N9r7z0/UfaWTUYyQhkfyE7ZM1vKDGVlJKsQRUKRUEgUyt6yyUhEJJK9+uu8dL6X5x7X474971vP8eW+u67rPI7jf+zjnGE2pxmzuf6mAUy1B6c9MO2B/2iB6RDqY8AVcRV262jkRbASXh7m3Dg8MA9OxRmYn06lehk8UgDsiKcGgRg1gO1wDVarBHeRMRduxgH4Bpvh3X4gujDvx2d5XI59Jvioq4yAuAe74g1sgh96Ce/KvM1nThyL85DYnYj6yci7JfB16+DCeL548kqcOA4Ace91WH9AnPYCEEsnyffCDnilxWdDPFtyKP/b7//+fDIeiMUuxiFDnu8lY0HchV3wFTbH+y0Qsf7xeBg7dXVv+/socjAuwlKDqsOQSZyKdS927hHvS+IjLISN8OJESg2jy3olXGKlrlR7YFl80SfeL8Mprfd5dhJuwqH9ACQm03SWboXG2jgSSdjJUANgD9yOW3Acfq+YxbrPlWdr4r3q3ep4C98V3X6plaitE8YHTUbDIZM4OXM15sO1OKZ1LhZOiKYP5Lem1xFDbo9HewH4CfOOEUBYb1MSMnLSM+6s5K1Smlb0WA7fVu+aMDofZ/cC8OcYlA/LdhU6AtfjszIyROGGnsBW2L+EW/N8b9yBB0qD++dAzfz/AjBHGdTWxYG4rQKQGeqSCRI2376Kd5CcmFIAEX50mZnuxp6VPrF+vJBymcRuqOnWCavFZgUATWX5BCtUCiX2Py+jRd1rUiF/LVUq/6fcA6lEP+I3zF3pk/8pk3+0ynbzPKV3lgCQKpTkHRZAOnLGjVkmhNbAm/gY2dwaylie6pTptA6hJonfRs5OeQiliaWptZN4azyOF7BxpWdTRu9vr6h1GU1MJjZHTe0+kDKa0XidCer9aWXSvRGHVYpkWcpOkL3jnF4eyKG0+1FTG8BRZZT4FCvj50rgk9gS+5bG1bzKZpYZKSvrY70AZFjLWJuJsRa6Vtm6Zsr+DihrXtviwTKypP4nhBpatTSqRELKaYa3UBQPgCRwlv6ew1w/nTJIZQBLo+lKDYAtivVSgbKJZVGpqRkm2+FzBU7ADTi8LbzrRpZp9dIy1g4LpJGR38R4rHtyqfUNj03xdGlUaXIflBepRB+WhSZr5Uv/FUDOL44LS5IlIQfRICMtWhb4TKNZVU+vGMZT2R0eKuH9L1mDmPdTLtcdWeo3GICgn4yEUybMzPmvIZ5optOU0WcK78jIMDdSAGEWD2QwuwCxZFcZ2fRihC/LJVbCJZQrmvSCeCUlNCHXmfmg0KjfJ66zdOzX0UjNRUHugOKBUOae+8otRDaxeCWVaawAGuYpk6lW9czeJUyj/K1I5804kbun9lXLTEC6MB/WI7kqicvPxAJD3h01vM8q3fb7ctnV5EBP2eMA0AjLnJ8qsvuwyMuofG5J7IHKh+84AXTQe/KfTgOYvO1Gc3LaA6Ox4+S5THtg8rYbzcnZ3gN/ARZGwzEZJiTeAAAAAElFTkSuQmCC);
+}
