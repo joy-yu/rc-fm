@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import './Control.css';
 
 export default class Control extends Component {
+
+  static propTypes = {
+    isPlaying: React.PropTypes.bool,
+    previousClick: React.PropTypes.func,
+    toggleRun: React.PropTypes.func,
+    nextClick: React.PropTypes.func,
+  }
+
+  static defaultProps = {
+    isPlaying: false,
+  }
+
   render(){
     return(
       <div id="control">

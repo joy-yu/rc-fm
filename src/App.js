@@ -24,13 +24,14 @@ export default class App extends Component {
     };
   }
 
-  randomNumber(n){
+  //0-n的随机数
+  randomNumber = (n) => {
     return parseInt(n * Math.random(), 10);
   }
 
 
   //开始播放
-  start(od) {
+  start = (od) => {
     this.setState({isPlaying: true});
     this.player.src = tracks[od].mp3Url;
     this.player.play();
@@ -38,9 +39,9 @@ export default class App extends Component {
 
 
   //切换播放列表显示
-  toggleList(){
-    let list = document.getElementById('list');
-    let listBtn = document.getElementById('listBtn');
+  toggleList = () => {
+    let list = this.refs['list'].refs['list'];
+    let listBtn = this.refs['listBtn'].refs['listBtn'];
     if(list.className.indexOf('to-right') === -1){
       list.className +=' to-right';
       listBtn.className +=' to-right';
@@ -51,7 +52,7 @@ export default class App extends Component {
   }
 
   //播放列表点击
-  listClick(od, e) {
+  listClick = (od, e) => {
     this.setState({
       preOrder: this.state.runOrder,
       runOrder: od
@@ -62,34 +63,22 @@ export default class App extends Component {
   }
 
   //播放类型切换
-  changeRunType(typeIcon) {
-
-    if (this.state.runType === 0) {
-      this.setState({
-        runType: this.state.runType + 1
-      }, () => {
-        typeIcon.className = 'i-rand';
-      });
-
-    } else if (this.state.runType === 1) {
-      this.setState({
-        runType: this.state.runType + 1
-      }, () => {
-        typeIcon.className = 'i-loop-one';
-      });
-
-    } else if (this.state.runType === 2) {
-      this.setState({
-        runType: 0
-      }, () => {
-        typeIcon.className = 'i-loop';
-      });
-    }
+  changeRunType = (typeIcon) => {
+    let iconClass = ['i-loop','i-rand', 'i-loop-one' ],
+        iconLen = iconClass.length;
+    let runType = this.state.runType;
+  
+    this.setState({
+      runType: runType !== iconLen - 1 ? runType + 1 : 0
+    }, () => {
+      typeIcon.className = iconClass[this.state.runType];
+    });
+  
   };
 
 
   //暂停播放切换
-  toggleRun() {
+  toggleRun = () => {
     if (this.player.paused) {
       this.setState({isPlaying: true});
       this.player.play();
@@ -100,7 +89,7 @@ export default class App extends Component {
   }
 
   //播放前一首
-  previousClick() {
+  previousClick = () => {
     //顺序播放或单曲循环
     if (!this.state.runType || this.state.runType === 2) {
       if (this.state.runOrder !== 0) {
@@ -118,7 +107,7 @@ export default class App extends Component {
           this.start(this.state.runOrder);
         });
       }
-      //随机播放
+    //随机播放
     } else {
       let rdNum = this.randomNumber(tracks.length);
       this.setState({
@@ -131,7 +120,7 @@ export default class App extends Component {
   }
 
   //播放下一首
-  nextClick() {
+  nextClick = () => {
     let trackLen = tracks.length;
 
     //顺序播放或单曲循环
@@ -150,7 +139,7 @@ export default class App extends Component {
           this.start(this.state.runOrder);
         });
       }
-      //随机播放
+    //随机播放
     } else {
       let rdNum = this.randomNumber(tracks.length);
       this.setState({
@@ -163,11 +152,10 @@ export default class App extends Component {
   }
 
 
-
   //音量调节
-  changeVolume(e) {
-    let currVol = document.querySelector('.curr-vol');
-    let vControl = document.querySelector('.vc-box');
+  changeVolume = (e) => {
+    let currVol = this.refs['volumn'].refs['currVol'];
+    let vControl = this.refs['volumn'].refs['vcBox'];
     let rect = vControl.getBoundingClientRect();
 
     let volValue = (100 - e.clientY + rect.top) > 100 ? 100 : (100 - e.clientY + rect.top);
@@ -188,7 +176,7 @@ export default class App extends Component {
   }
 
   //播放列表触摸事件
-  handleListTouch(e){
+  handleListTouch = (e)=>{
 
     if (e.type === 'touchstart') {
       this.setState({
@@ -207,8 +195,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    let progressNow = document.getElementById('progressNow');
-
+    
     setTimeout(()=>{
       this.start(this.state.runOrder);
     },1000);
@@ -222,11 +209,11 @@ export default class App extends Component {
       }
     });
 
-    //监听播放时间更新
+    //监听播放时间更新(顶部滚动条)
     this.player.addEventListener('timeupdate', () => {
+      let progressNow = document.getElementById('progressNow');
       let totalTime = this.player.duration;
       progressNow.style.width = `${this.player.currentTime/totalTime*100}%`;
-
     });
 
     //监听加载错误
@@ -252,29 +239,33 @@ export default class App extends Component {
         </div>
 
         {/*歌曲信息*/}
-        <Track {...this.state}/>
+        <Track
+          {...this.state}
+          source={tracks} />
 
         {/*底部播放控制*/}
         <Control
           {...this.state}
-          previousClick={this.previousClick.bind(this)}
-          toggleRun={this.toggleRun.bind(this)}
-          nextClick={this.nextClick.bind(this)} />
+          previousClick={this.previousClick}
+          toggleRun={this.toggleRun}
+          nextClick={this.nextClick} />
 
         {/*左部列表*/}
         <List
           {...this.state}
-          listClick={this.listClick.bind(this)}
-          handleListTouch={this.handleListTouch.bind(this)}/>
+          source={tracks}
+          listClick={this.listClick}
+          handleListTouch={this.handleListTouch}
+          ref="list" />
 
         {/*左下列表按钮*/}
-        <ListBtn toggleList={this.toggleList.bind(this)}/>
+        <ListBtn toggleList={this.toggleList} ref="listBtn"/>
 
         {/*中下播放类型*/}
-        <RunType changeRunType={this.changeRunType.bind(this)}/>
+        <RunType changeRunType={this.changeRunType}/>
 
         {/*右下音量控制*/}
-        <Volume changeVolume={this.changeVolume.bind(this)}/>
+        <Volume changeVolume={this.changeVolume} ref="volumn"/>
 
       </div>
     );

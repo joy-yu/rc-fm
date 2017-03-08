@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './List.css';
-import  {tracks} from '../public/data.json';
 
 
 export default class List extends Component {
   render() {
     return (
-      <div id="list" onTouchStart={this.props.handleListTouch} onTouchEnd={this.props.handleListTouch}>
+      <div id="list" ref="list" onTouchStart={this.props.handleListTouch} onTouchEnd={this.props.handleListTouch}>
         <ListItem {...this.props}/>
       </div>
     );
@@ -17,7 +16,7 @@ class ListItem extends Component{
   render(){
     return(
       <ul>{
-      tracks.map((v, i) => {
+      this.props.source.map((v, i) => {
         return(
           <li className={`clearfix list-item ${this.props.runOrder===i?'list-on':''}`} key={`ml${i}`} onClick={this.props.listClick.bind(this,i)} >
             <div className="col col-1">
