@@ -1,0 +1,100 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Microsoft YaHei',sans-serif;
+}
+
+a{
+  cursor: pointer;
+}
+ul{
+  list-style: none;
+}
+.clearfix:after{
+  overflow: hidden;
+  content: '';
+  display: block;
+  clear: both;
+}
+
+
+
+html,body{
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+
+
+/**
+ * 背景蒙层
+ */
+.blur{
+  position: absolute;
+  z-index: -1;
+  left: 0;right: 0;top: 0;bottom: 0;
+  filter:blur(80px);
+  filter:progid:DXImageTransform.Microsoft.blur(pixelradius=50,makeshadow=false)；
+}
+.bgPic{
+  position: absolute;
+  width: 100%;height: 100%;
+  overflow: hidden;
+}
+
+
+/**
+ * 顶部进度条
+ */
+#progress{
+  position: fixed;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 5px;
+  background: #bbb;
+  border-radius: 0 5px 5px; 
+}
+#progressNow{
+  width: 0;
+  background: red;
+  height: 100%;
+  border-radius: inherit;
+}
+
+
+
+/**
+ * 按钮总体样式
+ */
+.i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+  width: 48px;height: 48px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+  transform: scale(1.2);
+}
+
+/**
+ * 小屏按钮适配
+ */
+@media screen and (max-width:500px){
+  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+    transform:scale(0.8);
+  }
+  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+    transform: scale(1);
+  }
+}
+@media screen and (max-height:600px){
+  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+    transform:scale(0.8);
+  }
+  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+    transform: scale(1);
+  }
+}
