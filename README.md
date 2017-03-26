@@ -3,7 +3,8 @@
 [传送门](https://joy-yu.github.io/rc-fm)
 
 ## 更新  
-> * 开启dva重构分支  
+> * 开启dva重构分支
+> * 重构这玩意还挺惨的...
 
 ## TODO
 > * 歌单扩展
