@@ -17,16 +17,11 @@ class App extends Component{
   }
 
 
-  //0-n的随机数
-  randomNumber = (n) => {
-    return parseInt(n * Math.random(), 10);
-  };
-
-
   //开始播放
   start = (od) => {
     this.props.dispatch({
-      type: 'playerState/start'
+      type: 'playerState/start',
+      runOrder: od
     });
     this.player.src = tracks[od].mp3Url;
     this.player.play();
@@ -72,82 +67,8 @@ class App extends Component{
 
 
   //暂停播放切换
-  toggleRun = () => {
-    if (this.player.paused) {
-      this.props.dispatch({
-        type: 'player/start'
-      });
-      this.player.play();
-    } else {
-      this.props.dispatch({
-        type: 'player/pause'
-      });
-      this.player.pause();
-    }
-  }
 
-  //播放前一首
-  previousClick = () => {
-    //顺序播放或单曲循环
-    if (!this.props.playerState.runType || this.props.playerState.runType === 2) {
-      if (this.props.playerState.runOrder !== 0) {
-        this.setState({
-          runOrder: this.props.playerState.runOrder - 1,
-          preOrder: this.props.playerState.runOrder
-        }, () => {
-          this.start(this.props.playerState.runOrder);
-        });
 
-      } else {
-        this.setState({
-          runOrder: 0
-        }, () => {
-          this.start(this.props.playerState.runOrder);
-        });
-      }
-    //随机播放
-    } else {
-      let rdNum = this.randomNumber(tracks.length);
-      this.setState({
-        runOrder: this.props.playerState.preOrder,
-        preOrder: rdNum
-      }, () => {
-        this.start(this.props.playerState.runOrder);
-      });
-    }
-  }
-
-  //播放下一首
-  nextClick = () => {
-    let trackLen = tracks.length;
-
-    //顺序播放或单曲循环
-    if (!this.props.playerState.runType || this.props.playerState.runType === 2) {
-      if (this.props.playerState.runOrder !== trackLen - 1) {
-        this.setState({
-          runOrder: this.props.playerState.runOrder + 1,
-          preOrder: this.props.playerState.runOrder
-        }, () => {
-          this.start(this.props.playerState.runOrder);
-        });
-      } else {
-        this.setState({
-          runOrder: 0
-        }, () => {
-          this.start(this.props.playerState.runOrder);
-        });
-      }
-    //随机播放
-    } else {
-      let rdNum = this.randomNumber(tracks.length);
-      this.setState({
-        runOrder: rdNum,
-        preOrder: this.props.playerState.runOrder
-      }, () => {
-        this.start(this.props.playerState.runOrder);
-      });
-    }
-  }
 
 
   //音量调节
@@ -244,9 +165,10 @@ class App extends Component{
         {/*底部播放控制*/}
         <Control
           {...this.props.playerState}
-          previousClick={this.previousClick}
-          toggleRun={this.toggleRun}
-          nextClick={this.nextClick} />
+          start={this.start}
+          source={tracks}
+          player={this.player}
+          dispatch={this.props.dispatch} />
 
         {/*左部列表*/}
         <List

@@ -1,0 +1,47 @@
+.i-start{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACO0lEQVRoQ+3YS6tOURjA8d/JwEh8CWPfQPkERjI3QCbIXSS5XxJKRIpESiGlSAxIBhJFDJDkriSX3G89tXbpON6z9zlrX946T+3ZXmv9/+vZa+9nPwP6PAb6nN+YQNsZrJKByZiEm/jRNnixfhmBcTiKmWnQQyzBqS5IlBGYhYNDwF7CAtxuU6SMwB7M+w/kT+zHarxpQ6SMwD7MGQbuLdYiZBs9H7kECr97WIjzTWUjt0DBfTaJ3K9bpC6B4P6O3ViHd3WJ1ClQML/GqvQm+5VbpAmBgvkW5uNyTokmBQruE+lD+DiHSBsCwf0F27EJn0Yj0pZAwfwUy3EMv0ci0rZAwXwtnY/rVSW6IhDckYEjKSMvyop0SaBg/oiN2IGvw4l0UaBgfoTFONlLossCBfc5zEBk5p/oB4GA3pLORt8KXMHUfs7AAczuV4EoyafhWb8JRImxGdtS6THky6irhzhKi2WIUqNndE0gSokouaO0KBVdEXiJFThctahrWyBKhZ3YgA+ltnzQTW0KnE6lQnT6RhxtCNxJHb2LI6b+a2CTAtG5W4NolEVHL0s0IRCdur0JPjp4WaNugQvpcbmblbqBR+gBFuFMXeDFvLkz8B7rsQvf6oaP+XMJRMftEFbiVRPgVTIQB3BuD6ir6fN/o0nwKgLxXxoV4eB4gqU43gZ4FYEJiD+iKWnQZ2xN16i6ajnEy5yBWGc8pmMiovf/PMfiOeYoK5BjrVrmGBOoZVsrTDqWgQqbVcutfwDS4oAxbm01CwAAAABJRU5ErkJggg==);
+}
+.i-pause{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAA20lEQVRoQ+2ZQQ7CIBBFX6MXc2F04XVN1IUXs4kmxlUFCtSija9bZoD58+dDmY6Ff93C948BfDuDZmCJGbgA28TGz8A+Mn4FNpW+QbcaCt0zUA/NuwL6St+oW8sA1sDNAAYImIEIJULASKEQWFJICr0jUMSKIuPXWrUHmUVsEUsh70ITJUsKSSEp9ETAk3jkt7LoelNkrAqpQqqQKuTD1rAKlFFfJSYqoxT6Jwr9TIPjBOwSN8ojcIiMj7WnUr4fazFlNFnamdQUcbvdZaxkABkgzWpiBmaFN2PyB8jiTDEsF//dAAAAAElFTkSuQmCC);
+}
+
+.i-previous{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAA/ElEQVRoQ+3ZQQ6CQAwF0HIy9WbeXGNCN6MjU2j7f5OyYUPgv3YGG9mk+LEVzy8NQHewO8DcgdckXHbX7iLyFJHP+ev4FwYN0OC3PfXPrIyAMbhWnR4wC04POApOC1gNTgewBqcBnA0OB1wNDgN4BU8HeAdPA0QFDwdEBw8DZAV3Bzz26VCHrKyJ2m0Wygo8PqcBqMq77wEUpJcQqvLuS6j8a1TXYtkfsnEzZUHcNvHsn4xoSDhAN1sUJA0QBUkHeENgAC8IHHAVQgM4C6EDWCG0gFUIPeAIUgYwg5QDjBDzJyb0/L/0/OwPdkuhLBc1wFKtiGu7AxFVtdzzDdWjQjElTaCjAAAAAElFTkSuQmCC);
+}
+
+.i-next{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAA7klEQVRoQ+3aSRKFMAgEULy5N1NP5q+/yMYyJiI0TRVu3Dj0A4c4LJJ8WpLnlwJEd7A6wNyBXURWEfnPkdPZ2dnt0fJ0CLUNHWCIOaAVBAVxA6Ag7gBvCAzgBYEDrCFhACtIOOArhAaghdAB3kJoAbMQesAIkgbQg6QDXCGb9WgUOZR+2pd6OF0AowpUB4wKqd5MdUBduskV2yNrusvo9Vk7zY2s95KAHjB6u0ELGAVvpwodYDY4HeBtcBqANng44GvwMIBVcDjAOjgM4BXcHeAd3A2ACm4OSP+JaXIUHLtYfWaNrb/UrwbRDcjfgR/04Hox+IApqgAAAABJRU5ErkJggg==);
+}
+/**
+ * 按钮总体样式
+ */
+.i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+  width: 48px;height: 48px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+  transform: scale(1.2);
+}
+
+/**
+ * 小屏按钮适配
+ */
+@media screen and (max-width:500px){
+  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+    transform:scale(0.8);
+  }
+  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+    transform: scale(1);
+  }
+}
+@media screen and (max-height:600px){
+  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+    transform:scale(0.8);
+  }
+  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+    transform: scale(1);
+  }
+}
