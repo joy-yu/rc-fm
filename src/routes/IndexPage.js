@@ -13,118 +13,35 @@ import { tracks } from '../data.json';
 class App extends Component{
   constructor(props) {
     super(props);
-    this.player = new Audio();
+    this.player = null;
   }
 
 
-  //开始播放
-  start = (od) => {
-    this.props.dispatch({
-      type: 'playerState/start',
-      runOrder: od
-    });
-    this.player.src = tracks[od].mp3Url;
-    this.player.play();
-  };
 
 
-  /*切换播放列表显示
-  toggleList = () => {
-    let list = this.refs['list'].refs['list'];
-    let listBtn = this.refs['listBtn'].refs['listBtn'];
-    if(list.className.indexOf('to-right') === -1){
-      list.className +=' to-right';
-      listBtn.className +=' to-right';
-    } else{
-      list.className = (list.className.replace('to-right', '')).trim();
-      listBtn.className = (listBtn.className.replace('to-right', '')).trim();
-    }
-  }
-  */
-  //播放列表点击
-  listClick = (od, e) => {
-    this.props.dispatch({
-      type: 'playerState/listClick',
-      runOrder: od
-    });
-    this.toggleList();
-    this.start(od);
-  }
-
-  //播放类型切换
-  changeRunType = (typeIcon) => {
-    let iconClass = ['i-loop','i-rand', 'i-loop-one' ],
-        iconLen = iconClass.length;
-    let runType = this.props.playerState.runType;
-  
-    this.setState({
-      runType: runType !== iconLen - 1 ? runType + 1 : 0
-    }, () => {
-      typeIcon.className = style[iconClass[this.props.playerState.runType]];
-    });
-  
-  };
-
-
-  //暂停播放切换
-
-
-
-
-  //音量调节
-  changeVolume = (e) => {
-    let currVol = this.refs['volumn'].refs['currVol'];
-    let vControl = this.refs['volumn'].refs['vcBox'];
-    let rect = vControl.getBoundingClientRect();
-
-    let volValue = (100 - e.clientY + rect.top) > 100 ? 100 : (100 - e.clientY + rect.top);
-    currVol.style.height = volValue + 'px';
-    this.player.volume = volValue * 0.01;
-
-
-    let moveVol = (e1) => {
-      volValue = (100 - e1.clientY + rect.top) > 100 ? 100 : (100 - e1.clientY + rect.top);
-      currVol.style.height = volValue + 'px';
-      this.player.volume = volValue * 0.01;
-    };
-
-    vControl.addEventListener('mousemove', moveVol);
-    vControl.addEventListener('mouseup', () => {
-      vControl.removeEventListener('mousemove', moveVol);
-    });
-  }
-
-  //播放列表触摸事件
-  handleListTouch = (e)=>{
-
-    if (e.type === 'touchstart') {
-      this.setState({
-        firstPosX: e.touches[0].clientX
-      });
-    }
-    if (e.type === 'touchend') {
-      this.setState({
-        endPosX: e.changedTouches[0].clientX
-      }, () => {
-        if (Math.abs(this.props.playerState.firstPosX - this.props.playerState.endPosX) > 50) {
-          this.toggleList();
-        }
-      });
-    }
-  }
 
   componentDidMount = () => {
 
+    this.player = document.getElementById('player');
+    this.player.pause();
 
     setTimeout(()=>{
-      this.start(this.props.playerState.runOrder);
+      this.props.dispatch({
+        type: 'playerState/reStart',
+        player:this.player
+      });
     },1000);
+
     //监听播放结束
     this.player.addEventListener('ended', () => {
+      console.log(this.props.playerState);
       if (this.props.playerState.runType === 2)
         this.start(this.props.playerState.runOrder);
       else {
-        this.nextClick();
+        this.props.dispatch({
+          type: 'playerState/nextClick',
+          trackLen:tracks.length
+        });
       }
     });
 
@@ -139,6 +56,7 @@ class App extends Component{
     this.player.addEventListener('error', () => {
       alert('脚滑的网易云不让你听了。。')
     });
+
   }
 
 
@@ -147,9 +65,13 @@ class App extends Component{
     return (
       <div className={style.App}>
         
+        <div>
+          <audio autoPlay id="player" src={tracks[this.props.playerState.runOrder].mp3Url} ></audio>
+        </div>
+
         {/*顶层进度条*/}
-        <div id="progress">
-          <p id="progressNow"></p>
+        <div className={style['progress']}>
+          <p id="progressNow" className={style['progressNow']}></p>
         </div>
 
         {/*模糊背景*/}
@@ -173,19 +95,24 @@ class App extends Component{
         {/*左部列表*/}
         <List
           {...this.props.playerState}
+          isShowList={this.props.playerState.isShowList}
           source={tracks}
-          listClick={this.listClick}
           handleListTouch={this.handleListTouch}
-          /*ref="list"*/ />
+          dispatch={this.props.dispatch}
+          />
 
         {/*左下列表按钮*/}
-        <ListBtn  /*ref="listBtn"*/ toggleList={this.toggleList} />
+        <ListBtn
+          isShowList={this.props.playerState.isShowList}
+          dispatch={this.props.dispatch} />
 
         {/*中下播放类型*/}
-        <RunType changeRunType={this.changeRunType}/>
+        <RunType
+          dispatch={this.props.dispatch}
+          runType={this.props.playerState.runType}/>
 
         {/*右下音量控制*/}
-        <Volume changeVolume={this.changeVolume} /*ref="volumn"*/ />
+        <Volume player={this.player} />
 
       </div>
     );

@@ -47,7 +47,7 @@ html,body{
 /**
  * 顶部进度条
  */
-#progress{
+.progress{
   position: fixed;
   top: 0;
   left: 25%;
@@ -56,7 +56,7 @@ html,body{
   background: #bbb;
   border-radius: 0 5px 5px; 
 }
-#progressNow{
+.progressNow{
   width: 0;
   background: red;
   height: 100%;

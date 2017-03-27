@@ -57,3 +57,14 @@
   float: right;
   width: 33%;
 }
+
+.to-right{
+  transition: 0.4s transform;
+  transform: translateX(360px);
+}
+.clearfix:after{
+  overflow: hidden;
+  content: '';
+  display: block;
+  clear: both;
+}

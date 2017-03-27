@@ -8,63 +8,76 @@ export default {
 
   state: {
     isPlaying: false,
+    isShowList: false,
     runOrder: 0,
     preOrder: 0,
     runType: 0, //0顺序，1随机，2单曲
-    firstPosX: 0,
-    endPosX: 0,
+    volume: 1
   },
 
   reducers: {
-    start(state, { runOrder }) {
+    start(state, { runOrder,player }) {
+      player.play();
       return {...state, isPlaying:true, runOrder:runOrder}
     },
-    pause(state) {
+    reStart(state,{player}) {
+      player.play();
+      return {...state, isPlaying:true}
+    },
+    pause(state,{player}) {
+      player.pause();
       return {...state, isPlaying:false}
     },
-    listClick(state,{runOrder:od}){
-      return {...state, preOrder:state.runOrder, runOrder:od}
+    listClick(state,{runOrder}){
+      return {...state, preOrder:state.runOrder, runOrder}
     },
-    previousClick(state,{runOrder:rod,preOrder:pod}){
+    previousClick(state,{trackLen}){
+
       //顺序播放或单曲循环
       if (!state.runType || state.runType === 2) {
+
         if (state.runOrder !== 0) {
           return {...state, runOrder: state.runOrder - 1, preOrder: state.runOrder}
-          //this.start(this.props.playerState.runOrder);
 
         } else {
           return {...state, runOrder: 0}
-          //this.start(this.props.playerState.runOrder);
         }
       //随机播放
       } else {
-        let rdNum = randomNumber(tracks.length);
+        let rdNum = randomNumber(trackLen);
         return {...state, runOrder: state.preOrder, preOrder: rdNum}
-        //this.start(this.props.playerState.runOrder);
       }
     },
     nextClick(state, {trackLen}){
       //顺序播放或单曲循环
       if (!state.runType || state.runType === 2) {
         if (state.runOrder !== trackLen - 1) {
-console.log({...state, runOrder:state.runOrder+1});
           return {...state, runOrder: state.runOrder + 1, preOrder: state.runOrder}
-          //this.start(state.runOrder);
         } else {
           return {...state, runOrder: 0}
-          //this.start(state.runOrder);
         }
       //随机播放
       } else {
-        let rdNum = randomNumber(tracks.length);
-        return {...state, runOrder: state.preOrder, preOrder: rdNum}
-        //this.start(this.props.playerState.runOrder);
+        let rdNum = randomNumber(trackLen);
+        return {...state, runOrder: rdNum, preOrder: state.runOrder}
       }
     },
+    toggleList(state){
+      return {...state, isShowList:!state.isShowList}
+    },
+    changeRunType(state){
+      let iconClass = ['i-loop','i-rand', 'i-loop-one' ],
+          iconLen = iconClass.length - 1;
+      let runType = state.runType;
+      return {...state,runType: runType !== iconLen ? runType + 1 : 0}
+    },
+    changeVolume(state){
+      
+    }
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {  // eslint-disable-line
+    *fetch({ payload }, { call, put }) {
       yield put({ type: 'save' });
     },
   },

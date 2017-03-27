@@ -7,9 +7,9 @@ const Control = ({runOrder,...props})=> {
 
   const previousClick = ()=>{
     ControlProps.dispatch({
-      type: 'playerState/previousClick'
+      type: 'playerState/previousClick',
+      trackLen:ControlProps.source.length
     });
-    ControlProps.start(runOrder);
   }
     
   const nextClick = ()=>{
@@ -17,21 +17,19 @@ const Control = ({runOrder,...props})=> {
       type: 'playerState/nextClick',
       trackLen:ControlProps.source.length
     });
-  console.log(runOrder);
-    ControlProps.start(runOrder);
   }
 
-  const toggleRunClick = ()=>{
-    if (ControlProps.player.paused) {
+  const toggleRunClick = (playState)=>{
+    if (!playState) {
       ControlProps.dispatch({
-        type: 'player/start'
+        type: 'playerState/reStart',
+        player: ControlProps.player
       });
-      ControlProps.player.play();
     } else {
       ControlProps.dispatch({
-        type: 'player/pause'
+        type: 'playerState/pause',
+        player: ControlProps.player
       });
-      ControlProps.player.pause();
     }
   }
 
@@ -39,21 +37,9 @@ const Control = ({runOrder,...props})=> {
     <div id="control" className={style.control}>
 
       <Icon iconType="previous" iconClick={previousClick}/>
-      <Icon iconType={ControlProps.isPlaying?'pause':'start'} iconClick={toggleRunClick}/>
+      <Icon iconType={ControlProps.isPlaying?'pause':'start'} iconClick={toggleRunClick.bind(null,ControlProps.isPlaying)}/>
       <Icon iconType="next" iconClick={nextClick}/>
-      {/*
-      <a id="previous" onClick={previousClick}>
-        <i className={style['i-previous']}></i>
-      </a>
 
-      <a id="play" onClick={toggleRun}>
-        <i className={isPlaying?style['i-pause']:style['i-start']}></i>
-      </a>
-
-      <a id="next" onClick={nextClick}>
-        <i className={style['i-next']}></i>
-      </a>
-      */}
     </div>
   );
 }
