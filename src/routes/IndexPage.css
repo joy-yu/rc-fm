@@ -55,6 +55,7 @@ html,body{
   height: 5px;
   background: #bbb;
   border-radius: 0 5px 5px; 
+  cursor: all-scroll;
 }
 .progressNow{
   width: 0;
@@ -65,9 +66,8 @@ html,body{
 
 
 
-/**
- * 按钮总体样式
- */
+/*
+ //按钮总体样式
 .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
   width: 48px;height: 48px;
   background-repeat: no-repeat;
@@ -79,9 +79,8 @@ html,body{
   transform: scale(1.2);
 }
 
-/**
- * 小屏按钮适配
- */
+
+//小屏按钮适配
 @media screen and (max-width:500px){
   .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
     transform:scale(0.8);
@@ -97,4 +96,5 @@ html,body{
   .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
     transform: scale(1);
   }
-}
+} 
+*/

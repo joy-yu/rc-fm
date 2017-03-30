@@ -11,6 +11,7 @@
 }
 .control a{
   margin: 0 1em;
+  display: inline-block;
 }
 
 .i-start{

@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './ListBtn.css';
+import Icon  from './Icon.js';
 
 const ListBtn = ({isShowList, dispatch})=> {
 
@@ -10,8 +11,9 @@ const ListBtn = ({isShowList, dispatch})=> {
   }
 
   return(
-    <a id="listBtn" className={`${style['listBtn']} ${isShowList?style['to-right']:''}`} onClick={toggleList} /*ref="listBtn"*/>
-      <i className={style['list-icon']}></i>
+    //<Icon iconType="listBtn" iconClick={toggleList}/>
+    <a className={`${style['listBtn']} ${isShowList?style['to-right']:''}`} onClick={toggleList}>
+      <i className={style['i-listBtn']}></i>
     </a>
   );
 

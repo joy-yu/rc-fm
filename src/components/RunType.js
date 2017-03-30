@@ -1,17 +1,22 @@
 import React from 'react';
 import style from './RunType.css';
+import Icon  from './Icon.js';
 
 const RunType = ({runType,dispatch})=> {
 
+  const iconClass = ['i-loop','i-rand', 'i-loop-one' ];
+
   const changeRunType  = ()=>{
     dispatch({
-      type: 'playerState/changeRunType'
+      type: 'playerState/changeRunType',
+      iconClass
     })
   }
 
   return(
-    <a id="runType" className={style.runType} onClick={changeRunType/*.bind(null, RunType.refs['typeIcon'])*/} >
-      <i className={runType===0?style['i-loop']:runType===1?style['i-rand']:style['i-loop-one']} /*ref="typeIcon"*/></i>
+    //<Icon iconType="previous" iconClick={previousClick}/>
+    <a className={style.type} onClick={changeRunType} >
+      <i className={style[iconClass[runType]]}></i>
     </a>
   );
 }

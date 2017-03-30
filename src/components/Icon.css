@@ -15,14 +15,14 @@
 /**
  * 按钮总体样式
  */
-.i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+.i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.i-listBtn{
   width: 48px;height: 48px;
   background-repeat: no-repeat;
   display: inline-block;
   cursor: pointer;
   transition: 0.4s;
 }
-.i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+.i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.i-listBtn:hover{
   transform: scale(1.2);
 }
 
@@ -30,18 +30,18 @@
  * 小屏按钮适配
  */
 @media screen and (max-width:500px){
-  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.i-listBtn{
     transform:scale(0.8);
   }
-  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.i-listBtn:hover{
     transform: scale(1);
   }
 }
 @media screen and (max-height:600px){
-  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.list-icon{
+  .i-start,.i-pause,.i-previous,.i-next,.i-loop,.i-rand,.i-loop-one, .i-unmute,.i-listBtn{
     transform:scale(0.8);
   }
-  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.list-icon:hover{
+  .i-start:hover,.i-pause:hover,.i-previous:hover,.i-next:hover,.i-loop:hover,.i-rand:hover,.i-loop-one:hover, .i-unmute:hover,.i-listBtn:hover{
     transform: scale(1);
   }
 }

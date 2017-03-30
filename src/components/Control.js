@@ -2,42 +2,48 @@ import React from 'react';
 import style from './Control.css';
 import Icon from './Icon.js';
 
-const Control = ({runOrder,...props})=> {
-  const ControlProps = {...props};
+const Control = ({...props})=> {
+  const {
+    dispatch,
+    player,
+    source,
+    isPlaying
+  } = {...props};
 
   const previousClick = ()=>{
-    ControlProps.dispatch({
+    dispatch({
       type: 'playerState/previousClick',
-      trackLen:ControlProps.source.length
+      trackLen:source.length
     });
   }
     
   const nextClick = ()=>{
-    ControlProps.dispatch({
+    dispatch({
       type: 'playerState/nextClick',
-      trackLen:ControlProps.source.length
+      trackLen:source.length
     });
   }
 
-  const toggleRunClick = (playState)=>{
+  const toggleRunClick = ()=>{
+    const playState = isPlaying;
     if (!playState) {
-      ControlProps.dispatch({
+      dispatch({
         type: 'playerState/reStart',
-        player: ControlProps.player
+        player: player
       });
     } else {
-      ControlProps.dispatch({
+      dispatch({
         type: 'playerState/pause',
-        player: ControlProps.player
+        player: player
       });
     }
   }
 
   return(
-    <div id="control" className={style.control}>
+    <div className={style.control}>
 
       <Icon iconType="previous" iconClick={previousClick}/>
-      <Icon iconType={ControlProps.isPlaying?'pause':'start'} iconClick={toggleRunClick.bind(null,ControlProps.isPlaying)}/>
+      <Icon iconType={isPlaying?'pause':'start'} iconClick={toggleRunClick}/>
       <Icon iconType="next" iconClick={nextClick}/>
 
     </div>

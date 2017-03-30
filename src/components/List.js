@@ -2,20 +2,20 @@ import React from 'react';
 import style from './List.css';
 
 
-const List = ({isShowList,...props})=> {
+const List = ({...props})=> {
+  let { isShowList, dispatch } = {...props};
   let firstPosX = 0;
   let endPosX = 0;
-  let ListProps = {...props};
 
     //播放列表触摸事件
   const handleListTouch = (e)=>{
     if (e.type === 'touchstart') {
-      firstPosX = e.touches[0].clientX
+      firstPosX = e.touches[0].clientX;
     }
     if (e.type === 'touchend') {
-      endPosX = e.changedTouches[0].clientX
+      endPosX = e.changedTouches[0].clientX;
       if (Math.abs(firstPosX - endPosX) > 50) {
-        ListProps.dispatch({
+        dispatch({
           type: 'playerState/toggleList'
         });
       }
@@ -23,8 +23,8 @@ const List = ({isShowList,...props})=> {
   }
 
   return (
-    <div id="list" className={`${style['list']} ${isShowList?style['to-right']:''}`} onTouchStart={handleListTouch} onTouchEnd={handleListTouch}>
-      <ListItem {...ListProps}/>
+    <div className={`${style['list']} ${isShowList?style['to-right']:''}`} onTouchStart={handleListTouch} onTouchEnd={handleListTouch}>
+      <ListItem {...props}/>
     </div>
   );
 }

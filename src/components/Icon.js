@@ -4,7 +4,7 @@ import style from './Icon.css';
 
 const Icon = ({iconType,iconClick})=> {
   return(
-    <a id={iconType} onClick={iconClick}>
+    <a className={style[iconType]} onClick={iconClick}>
       <i className={style[`i-${iconType}`]}></i>
     </a>
   );

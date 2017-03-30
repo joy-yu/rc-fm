@@ -27,7 +27,7 @@ class Volume extends React.Component{
     });
   }
 
-  showVol() {
+  showVol = () => {
     if (this.refs['vcBox'].style.display === 'none') {
       this.refs['vcBox'].style.display = 'block';
     } else {
@@ -37,8 +37,8 @@ class Volume extends React.Component{
 
   render(){
   return(
-    <a id="volume" className={style['volume']} /*onClick={showVol}*/>
-      <div className={style['vc-box']} ref="vcBox"  onMouseDown={this.changeVolume}>
+    <a className={style['volume']} onClick={this.showVol}>
+      <div className={style['vc-box']} ref="vcBox"  onMouseDown={this.changeVolume} style={{display:'none'}}>
         <div className={style['curr-vol']} ref="currVol"></div>
       </div>
       <i className={style['i-unmute']} ></i>

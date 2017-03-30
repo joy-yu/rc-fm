@@ -16,7 +16,7 @@ export default {
   },
 
   reducers: {
-    start(state, { runOrder,player }) {
+    start(state, { runOrder=state.runOrder,player }) {
       player.play();
       return {...state, isPlaying:true, runOrder:runOrder}
     },
@@ -65,10 +65,10 @@ export default {
     toggleList(state){
       return {...state, isShowList:!state.isShowList}
     },
-    changeRunType(state){
-      let iconClass = ['i-loop','i-rand', 'i-loop-one' ],
-          iconLen = iconClass.length - 1;
-      let runType = state.runType;
+    changeRunType(state,{iconClass}){
+
+      const iconLen = iconClass.length - 1;
+      const runType = state.runType;
       return {...state,runType: runType !== iconLen ? runType + 1 : 0}
     },
     changeVolume(state){
